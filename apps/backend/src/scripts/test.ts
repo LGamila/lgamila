@@ -7,7 +7,7 @@ import { TwitchService } from '@/lib/services/twitch';
 
 export default async function main() {
   const twitchStreamers = [
-    'eddie',
+    'moongirlll_',
     'th3w3rwolf',
     'antivirus_____',
     'summonnval',
