@@ -4,7 +4,6 @@ import { Hono } from 'hono';
 import { cors } from 'hono/cors';
 import { logger as honoLogger } from 'hono/logger';
 import api from './api';
-import { TRUSTED_ORIGINS } from './constants';
 import { env, isDev } from './lib/env';
 import { logger } from './lib/logger';
 import type { ApiContext } from './types/api';
@@ -23,10 +22,7 @@ export const app = new Hono<ApiContext>()
     '*',
     cors({
       origin(origin) {
-        if (TRUSTED_ORIGINS.includes(origin)) {
-          return origin;
-        }
-        return null;
+        return origin;
       },
       credentials: true,
     })

@@ -7,6 +7,10 @@ import { TwitchService } from '@/lib/services/twitch';
 
 export default async function main() {
   const twitchStreamers = [
+    'eddie',
+    'th3w3rwolf',
+    'antivirus_____',
+    'summonnval',
     '1howari',
     '1upbruno',
     '3umaar',
@@ -218,6 +222,11 @@ export default async function main() {
     'mj4dn',
     'hakkimma',
     'bettywhite01',
+    'wrongnameee',
+    'criss_xc',
+    'tpm1g_fps',
+    'hajargh',
+    'moushibot',
   ];
 
   const kickMapping: Record<string, string> = {
@@ -251,6 +260,7 @@ export default async function main() {
     bettywhite01: 'bettywhite01',
     the19juicer: 'the19juicer',
     elmambix: 'elmambix',
+    eddie: 'eddie',
   };
 
   const kickStreamers = [
@@ -270,15 +280,18 @@ export default async function main() {
       continue;
     }
 
-    await db.insert(streamer).values(
-      streamers.value.map((streamer) => ({
-        name: streamer.name,
-        avatarUrl: streamer.profilePictureUrl,
-        twitchId: streamer.id,
-        twitchUsername: streamer.name,
-        kickUsername: kickMapping?.[streamer.name.toLowerCase()] ?? null,
-      }))
-    );
+    await db
+      .insert(streamer)
+      .values(
+        streamers.value.map((streamer) => ({
+          name: streamer.name,
+          avatarUrl: streamer.profilePictureUrl,
+          twitchId: streamer.id,
+          twitchUsername: streamer.name,
+          kickUsername: kickMapping?.[streamer.name.toLowerCase()] ?? null,
+        }))
+      )
+      .onConflictDoNothing();
   }
 
   for (const kickStreamer of kickStreamers) {
@@ -292,12 +305,15 @@ export default async function main() {
         logger.error('Streamer not found');
         continue;
       }
-      await db.insert(streamer).values({
-        name: value.slug,
-        avatarUrl: value.banner_picture,
-        kickId: value.broadcaster_user_id.toString(),
-        kickUsername: value.slug,
-      });
+      await db
+        .insert(streamer)
+        .values({
+          name: value.slug,
+          avatarUrl: value.banner_picture,
+          kickId: value.broadcaster_user_id.toString(),
+          kickUsername: value.slug,
+        })
+        .onConflictDoNothing();
     }
   }
 

@@ -41,7 +41,8 @@
       },
       "style": {
         "noEnum": "off",
-        "useBlockStatements": "off"
+        "useBlockStatements": "off",
+        "noNestedTernary": "off"
       },
       "performance": {
         "noNamespaceImport": "off",
@@ -65,7 +66,8 @@
         "noUnusedImports": {
           "level": "error",
           "fix": "safe"
-        }
+        },
+        "noUndeclaredVariables": "off"
       }
     }
   }

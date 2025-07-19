@@ -1,0 +1,89 @@
+@import "tw-animate-css";
+@import "./fonts.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #0f0f0f;
+  --foreground: #e0ddef;
+  --card: #121212;
+  --card-foreground: #e0ddef;
+  --popover: #121212;
+  --popover-foreground: #e0ddef;
+  --primary: #fdac77;
+  --primary-foreground: #202020;
+  --secondary: #fdac77;
+  --secondary-foreground: #e0ddef;
+  --muted: #202020;
+  --muted-foreground: #a09aad;
+  --accent: #5b5049;
+  --accent-foreground: #fdac77;
+  --destructive: #e57373;
+  --destructive-foreground: #121212;
+  --border: #1e1e1e;
+  --input: #1e1e1e;
+  --ring: #fdac77;
+  --chart-1: #a995c9;
+  --chart-2: #f2b8c6;
+  --chart-3: #77b8a1;
+  --chart-4: #f0c88d;
+  --chart-5: #a0bbe3;
+  --sidebar: #16141e;
+  --sidebar-foreground: #e0ddef;
+  --sidebar-primary: #a995c9;
+  --sidebar-primary-foreground: #1a1823;
+  --sidebar-accent: #372e3f;
+  --sidebar-accent-foreground: #f2b8c6;
+  --sidebar-border: #2a273a;
+  --sidebar-ring: #a995c9;
+  --font-sans: Geist, sans-serif;
+  --font-serif: "Lora", Georgia, serif;
+  --font-mono: "Fira Code", "Courier New", monospace;
+  --radius: 0.5rem;
+  --shadow-2xs: 1px 2px 5px 1px hsl(0 0% 0% / 0.03);
+  --shadow-xs: 1px 2px 5px 1px hsl(0 0% 0% / 0.03);
+  --shadow-sm:
+    1px 2px 5px 1px hsl(0 0% 0% / 0.06), 1px 1px 2px 0px hsl(0 0% 0% / 0.06);
+  --shadow:
+    1px 2px 5px 1px hsl(0 0% 0% / 0.06), 1px 1px 2px 0px hsl(0 0% 0% / 0.06);
+  --shadow-md:
+    1px 2px 5px 1px hsl(0 0% 0% / 0.06), 1px 2px 4px 0px hsl(0 0% 0% / 0.06);
+  --shadow-lg:
+    1px 2px 5px 1px hsl(0 0% 0% / 0.06), 1px 4px 6px 0px hsl(0 0% 0% / 0.06);
+  --shadow-xl:
+    1px 2px 5px 1px hsl(0 0% 0% / 0.06), 1px 8px 10px 0px hsl(0 0% 0% / 0.06);
+  --shadow-2xl: 1px 2px 5px 1px hsl(0 0% 0% / 0.15);
+
+  --sb-track-color: #202020;
+  --sb-thumb-color: #383838;
+  --sb-size: 8px;
+}
+
+.background {
+  background-image: url(data-base64:~assets/background.svg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+::-webkit-scrollbar {
+  width: var(--sb-size);
+}
+
+::-webkit-scrollbar-track {
+  background: var(--sb-track-color);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--sb-thumb-color);
+  border-radius: 3px;
+}
+
+@supports not selector(::-webkit-scrollbar) {
+  body {
+    scrollbar-color: var(--sb-thumb-color) var(--sb-track-color);
+  }
+}

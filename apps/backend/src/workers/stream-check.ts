@@ -81,6 +81,7 @@ function hasStreamStatusChanged(
     streamStatus.isLive !== (streamerDB.isLive ?? false) ||
     streamStatus.platform !== streamerDB.livePlatform ||
     streamStatus.category !== streamerDB.category ||
+    streamStatus.viewerCount !== streamerDB.viewerCount ||
     streamStatus.title !== streamerDB.title
   );
 }
