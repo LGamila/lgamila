@@ -18,5 +18,8 @@
     "*.{js,jsx,ts,tsx,json,jsonc,css,scss,md,mdx}": [
       "npx ultracite format"
     ]
+  },
+  "dependencies": {
+    "ws": "^8.18.3"
   }
 }

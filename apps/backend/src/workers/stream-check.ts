@@ -1,14 +1,15 @@
-import type { SandboxedJob } from 'bullmq';
-import { eq } from 'drizzle-orm';
-import cache from '@/lib/cache/default';
-import { db } from '@/lib/db';
-import { streamer } from '@/lib/db/schema';
-import type { Streamer } from '@/lib/db/types';
-import { logger } from '@/lib/logger';
-import { KickService } from '@/lib/services/kick';
-import { TwitchService } from '@/lib/services/twitch';
-import type { StreamCheckJob } from '@/types/queues';
-import { StreamPlatform } from '@/types/server';
+import type { SandboxedJob } from "bullmq";
+import { eq } from "drizzle-orm";
+import cache from "@/lib/cache/default";
+import { db } from "@/lib/db";
+import { streamer } from "@/lib/db/schema";
+import type { Streamer } from "@/lib/db/types";
+import { logger } from "@/lib/logger";
+import { KickService } from "@/lib/services/kick";
+import { TwitchService } from "@/lib/services/twitch";
+import type { StreamCheckJob } from "@/types/queues";
+import { StreamPlatform } from "@/types/server";
+import { broadcastStreamerLive } from "@/lib/ws-server";
 
 interface StreamStatus {
   isLive: boolean;
@@ -30,7 +31,7 @@ export default async function (job: SandboxedJob<StreamCheckJob>) {
         .withMetadata({
           jobId: job.id,
         })
-        .error('Streamer not found');
+        .error("Streamer not found");
       return;
     }
 
@@ -46,10 +47,20 @@ export default async function (job: SandboxedJob<StreamCheckJob>) {
     // Only update if status has changed
     const hasStatusChanged = hasStreamStatusChanged(streamerDB, streamStatus);
 
+    // If the streamer just went live, broadcast the event
+    if (hasStatusChanged && streamStatus.isLive && !streamerDB.isLive) {
+      broadcastStreamerLive({
+        id: streamerDB.id,
+        name: streamerDB.name,
+        avatarUrl: streamerDB.avatarUrl ?? undefined,
+        platform: streamStatus.platform || "unknown",
+      });
+    }
+
     if (hasStatusChanged) {
       // Clear the streamers cache
-      logger.info('Clearing streamers cache');
-      await cache.del('streamers');
+      logger.info("Clearing streamers cache");
+      await cache.del("streamers");
 
       // Update the streamer status
       await updateStreamerStatus(streamerId, streamStatus);
@@ -68,7 +79,7 @@ export default async function (job: SandboxedJob<StreamCheckJob>) {
       .withMetadata({
         jobId: job.id,
       })
-      .error('Failed to check if streamer is live');
+      .error("Failed to check if streamer is live");
     throw error;
   }
 }
@@ -145,7 +156,7 @@ async function checkTwitchStatus(
     logger
       .withError(result.error)
       .withMetadata({ jobId })
-      .error('Failed to check if streamer is live on Twitch');
+      .error("Failed to check if streamer is live on Twitch");
     return null;
   }
 
@@ -175,7 +186,7 @@ async function checkKickStatus(
     logger
       .withError(result.error)
       .withMetadata({ jobId })
-      .error('Failed to check if streamer is live on Kick');
+      .error("Failed to check if streamer is live on Kick");
     return null;
   }
 

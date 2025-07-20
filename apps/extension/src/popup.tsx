@@ -1,31 +1,66 @@
-import './index.css';
-import logo from 'data-base64:~assets/logo.svg';
-import { Loader2, Search, X } from 'lucide-react';
-import { useRef, useState } from 'react';
-import { QueryClient, QueryClientProvider } from 'react-query';
-import { Toaster } from '@/components/ui/sonner';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Footer } from './components/molecules/footer';
-import { SettingsDialog } from './components/molecules/settings';
-import { StreamerList } from './components/molecules/streamer-list';
-import { Button } from './components/ui/button';
-import { Card, CardContent } from './components/ui/card';
-import { Input } from './components/ui/input';
-import { useSearch } from './hooks/use-search';
-import { useStreamers } from './hooks/use-streamers';
-import { APP_NAME } from './lib/constants';
-import { cn } from './lib/utils';
+import "./index.css";
+import React from "react";
+import logo from "data-base64:~assets/logo.svg";
+import { Loader2, Search, X } from "lucide-react";
+import { useRef, useState } from "react";
+import { QueryClient, QueryClientProvider } from "react-query";
+import { Toaster } from "@/components/ui/sonner";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Footer } from "./components/molecules/footer";
+import { SettingsDialog } from "./components/molecules/settings";
+import { StreamerList } from "./components/molecules/streamer-list";
+import { Button } from "./components/ui/button";
+import { Card, CardContent } from "./components/ui/card";
+import { Input } from "./components/ui/input";
+import { useSearch } from "./hooks/use-search";
+import { useStreamers } from "./hooks/use-streamers";
+import { APP_NAME } from "./lib/constants";
+import { cn } from "./lib/utils";
+import { toast } from "sonner";
 
 function StreamersPopup() {
   const [toggleSearch, setToggleSearch] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const { data: streamersData, isLoading } = useStreamers();
+  const { data: streamersData, isLoading, refetch } = useStreamers();
   const streamers = streamersData?.streamers || [];
   const { search, results } = useSearch(streamers, {
-    keys: ['name', 'twitchUsername', 'kickUsername', 'category', 'title'],
+    keys: ["name", "twitchUsername", "kickUsername", "category", "title"],
     threshold: 0.3,
   });
+
+  // Polling for live status
+  const prevLiveIds = React.useRef<Set<string>>(new Set());
+
+  React.useEffect(() => {
+    const interval = setInterval(() => {
+      refetch();
+    }, 15000); // 15 seconds
+    return () => clearInterval(interval);
+  }, [refetch]);
+
+  React.useEffect(() => {
+    const currentLive = new Set(
+      streamers.filter((s) => s.isLive).map((s) => s.id)
+    );
+    const prevLive = prevLiveIds.current;
+    // Find streamers who just went live
+    streamers.forEach((s) => {
+      if (s.isLive && !prevLive.has(s.id)) {
+        // Request permission if needed
+        if (Notification.permission === "default") {
+          Notification.requestPermission();
+        }
+        if (Notification.permission === "granted") {
+          new Notification(`${s.name} is now live!`, {
+            body: `Live on ${s.livePlatform || "unknown"}`,
+            icon: s.avatarUrl || undefined,
+          });
+        }
+      }
+    });
+    prevLiveIds.current = currentLive;
+  }, [streamers]);
 
   return (
     <div className="background space-y-6 p-6 font-sans text-primary w-[450px] h-[600px] flex flex-col items-center bg-background overflow-hidden">
@@ -41,10 +76,9 @@ function StreamersPopup() {
           <div className="flex flex-row justify-between items-start">
             <div
               className={cn(
-                'flex flex-row justify-start',
-                toggleSearch && 'hidden'
-              )}
-            >
+                "flex flex-row justify-start",
+                toggleSearch && "hidden"
+              )}>
               <TabsList className="w-full border border-input">
                 <TabsTrigger value="all">All</TabsTrigger>
                 <TabsTrigger value="favorites">Favorites</TabsTrigger>
@@ -53,10 +87,9 @@ function StreamersPopup() {
             </div>
             <div
               className={cn(
-                'flex flex-row justify-center gap-4',
-                toggleSearch && 'w-full'
-              )}
-            >
+                "flex flex-row justify-center gap-4",
+                toggleSearch && "w-full"
+              )}>
               <Button
                 onClick={() => {
                   setToggleSearch(!toggleSearch);
@@ -65,8 +98,7 @@ function StreamersPopup() {
                   }
                 }}
                 size="icon"
-                variant="outline"
-              >
+                variant="outline">
                 {toggleSearch ? (
                   <X className="size-4" />
                 ) : (
@@ -107,7 +139,7 @@ function StreamersPopup() {
             <TabsContent value="offline">
               <Card className="w-full h-full">
                 <CardContent>
-                  <StreamerList offlineOnly streamers={results} />{' '}
+                  <StreamerList offlineOnly streamers={results} />{" "}
                 </CardContent>
               </Card>
             </TabsContent>
