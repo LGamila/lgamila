@@ -9,6 +9,10 @@ export const scheduleStreamCheckWorker = new Worker(
   {
     connection: redis,
     concurrency: 1,
+    limiter: {
+      max: 1,
+      duration: 1000,
+    },
   }
 );
 
@@ -18,5 +22,9 @@ export const streamCheckWorker = new Worker(
   {
     connection: redis,
     concurrency: 10,
+    limiter: {
+      max: 10,
+      duration: 1000,
+    },
   }
 );

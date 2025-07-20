@@ -6,7 +6,13 @@ import { KickService } from '@/lib/services/kick';
 import { TwitchService } from '@/lib/services/twitch';
 
 export default async function main() {
-  const twitchStreamers = [
+  const twitchStreamers = ['kamalero',
+    'austenxkinzaj',
+    'cherry_vns',
+    'droleeeet',
+    'shironomajo',
+    'kenpachi',
+    'maadlou',
     'moongirlll_',
     'th3w3rwolf',
     'antivirus_____',
@@ -230,7 +236,7 @@ export default async function main() {
   ];
 
   const kickMapping: Record<string, string> = {
-    keenpachl: 'keenpachl',
+    kenpachi: 'keenpachl',
     dreamerzlel: 'drmz',
     fouadox: 'fouadox',
     onlyauraa_: 'onlyauraa',

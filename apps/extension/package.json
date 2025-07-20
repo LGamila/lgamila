@@ -55,7 +55,6 @@
   "manifest": {
     "host_permissions": [
       "https://*/*"
-    ],
-    "key": "$CRX_PUBLIC_KEY"
+    ]
   }
 }
