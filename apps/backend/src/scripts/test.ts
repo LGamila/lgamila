@@ -6,7 +6,8 @@ import { KickService } from '@/lib/services/kick';
 import { TwitchService } from '@/lib/services/twitch';
 
 export default async function main() {
-  const twitchStreamers = ['kamalero',
+  const twitchStreamers = [
+    'kamalero',
     'austenxkinzaj',
     'cherry_vns',
     'droleeeet',
