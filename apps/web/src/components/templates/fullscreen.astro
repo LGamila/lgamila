@@ -1,10 +1,10 @@
 ---
 import '@lgamila/design-system/styles/global.css';
 import Footer from '../molecules/footer';
-import { Toaster } from '@lgamila/design-system/components/ui/sonner';
+import { DesignSystemProvider } from '@lgamila/design-system';
 ---
 
-<html lang="en" class="dark">
+<html lang="en">
 	<head>
 		<meta charset="utf-8" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -22,10 +22,11 @@ import { Toaster } from '@lgamila/design-system/components/ui/sonner';
 
 	</head>
 	<body class="flex flex-col items-center justify-center overflow-x-hidden py-5">
-    <main class="flex flex-col flex-grow container">
-      <slot /> 
-    </main>
-	<Footer />
-	<Toaster client:only="react" />
+		<DesignSystemProvider client:only="react">
+			<main class="flex flex-col flex-grow container">
+				<slot /> 
+			</main>
+			<Footer />
+		</DesignSystemProvider>
 	</body>
 </html>

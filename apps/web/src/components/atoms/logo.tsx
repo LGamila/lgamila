@@ -14,25 +14,25 @@ export default function Logo({ className }: { className?: string }) {
           fill="#FF3319"
         />
         <path
-          clip-rule="evenodd"
+          clipRule="evenodd"
           d="M42.0281 140.411C42.0994 140.475 42.1442 140.569 42.1441 140.672L42.1392 146.635C42.1391 146.739 42.0941 146.832 42.0227 146.896L42.0281 140.411Z"
           fill="#FFF9D8"
           fill-rule="evenodd"
         />
         <path
-          clip-rule="evenodd"
+          clipRule="evenodd"
           d="M42.0281 140.411C42.0994 140.475 42.1442 140.569 42.1441 140.672L42.1392 146.635C42.1391 146.739 42.0941 146.832 42.0227 146.896L42.0281 140.411Z"
           fill="#FFF9D8"
           fill-rule="evenodd"
         />
         <path
-          clip-rule="evenodd"
+          clipRule="evenodd"
           d="M165.22 145.473C165.026 145.473 164.869 145.63 164.869 145.823L164.864 151.787C164.864 151.98 165.021 152.138 165.214 152.138L171.178 152.143C171.371 152.143 171.529 151.986 171.529 151.792L171.534 145.829C171.534 145.635 171.377 145.478 171.183 145.478L165.22 145.473ZM171.88 152.143C171.686 152.143 171.529 152.3 171.529 152.494L171.518 165.122C171.518 165.316 171.675 165.473 171.869 165.473L177.832 165.478C178.026 165.478 178.183 165.321 178.183 165.127L178.194 152.499C178.194 152.305 178.037 152.148 177.843 152.148L171.88 152.143Z"
           fill="#FFF9D8"
           fill-rule="evenodd"
         />
         <path
-          clip-rule="evenodd"
+          clipRule="evenodd"
           d="M164.851 165.818C164.852 165.624 165.009 165.467 165.203 165.467L171.166 165.472C171.36 165.472 171.517 165.63 171.516 165.823L171.511 171.787C171.511 171.98 171.354 172.137 171.16 172.137L165.197 172.132C165.003 172.132 164.846 171.975 164.847 171.781L164.851 165.818Z"
           fill="#FFF9D8"
           fill-rule="evenodd"
@@ -80,7 +80,7 @@ export default function Logo({ className }: { className?: string }) {
       </g>
       <defs>
         <filter
-          color-interpolation-filters="sRGB"
+          colorInterpolationFilters="sRGB"
           filterUnits="userSpaceOnUse"
           height="244.457"
           id="filter0_gn_24_54"
@@ -88,7 +88,7 @@ export default function Logo({ className }: { className?: string }) {
           x="0.454199"
           y="3.95225"
         >
-          <feFlood flood-opacity="0" result="BackgroundImageFix" />
+          <feFlood floodOpacity="0" result="BackgroundImageFix" />
           <feBlend
             in="SourceGraphic"
             in2="BackgroundImageFix"
@@ -138,10 +138,7 @@ export default function Logo({ className }: { className?: string }) {
             operator="in"
             result="noise1Clipped"
           />
-          <feFlood
-            flood-color="rgba(244, 221, 127, 0.8)"
-            result="color1Flood"
-          />
+          <feFlood floodColor="rgba(244, 221, 127, 0.8)" result="color1Flood" />
           <feComposite
             in="color1Flood"
             in2="noise1Clipped"
