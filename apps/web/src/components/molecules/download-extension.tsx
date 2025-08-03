@@ -1,9 +1,9 @@
+import { Button } from '@lgamila/design-system/components/ui/button';
 import { AiOutlineChrome } from 'react-icons/ai';
 import { FaBraveReverse } from 'react-icons/fa6';
 import { RiFirefoxLine } from 'react-icons/ri';
 import { SiOperagx } from 'react-icons/si';
 import { TbBrandEdge } from 'react-icons/tb';
-import { Button } from '@/components/ui/button';
 
 export const DownloadExtension = () => {
   return (

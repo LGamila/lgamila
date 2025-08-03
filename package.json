@@ -13,6 +13,7 @@
     "url": "https://github.com/stormix/lgamila/issues"
   },
   "scripts": {
+    "clean": "turbo run clean --concurrency=15 && rimraf node_modules",
     "dev": "turbo dev",
     "build": "turbo build",
     "lint": "turbo lint",
@@ -20,6 +21,7 @@
   },
   "devDependencies": {
     "@biomejs/biome": "2.0.6",
+    "rimraf": "^5.0.5",
     "husky": "^9.1.7",
     "lint-staged": "^16.1.2",
     "prettier": "^3.5.3",

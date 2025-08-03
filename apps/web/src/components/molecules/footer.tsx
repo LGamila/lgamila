@@ -1,4 +1,4 @@
-import { cn } from '@/lib/utils';
+import { cn } from '@lgamila/design-system/lib/utils';
 import PixelHeart from '../icons/pixel-heart';
 
 export default function Footer({ className }: { className?: string }) {

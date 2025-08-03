@@ -30,7 +30,8 @@ function StreamerStatsClient() {
 
   const totalStreamers = data?.streamers.length || 0;
   const liveStreamers = data?.streamers.filter((s) => s.isLive).length || 0;
-  const viewers = data?.streamers.reduce((acc, s) => acc + s.viewerCount, 0) || 0;
+  const viewers =
+    data?.streamers.reduce((acc, s) => acc + s.viewerCount, 0) || 0;
 
   if (error) {
     // Fallback to static numbers if API fails
@@ -56,19 +57,19 @@ function StreamerStatsClient() {
     <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
       <div className="space-y-2">
         <div className="text-4xl font-bold text-accent">
-          {isLoading ? "..." : totalStreamers}
+          {isLoading ? '...' : totalStreamers}
         </div>
         <div className="text-muted-foreground">Streamers Supported</div>
       </div>
       <div className="space-y-2">
         <div className="text-4xl font-bold text-accent">
-          {isLoading ? "..." : liveStreamers}
+          {isLoading ? '...' : liveStreamers}
         </div>
         <div className="text-muted-foreground">Currently Live</div>
       </div>
       <div className="space-y-2">
         <div className="text-4xl font-bold text-accent">
-          {isLoading ? "..." : viewers}
+          {isLoading ? '...' : viewers}
         </div>
         <div className="text-muted-foreground">Live Viewers</div>
       </div>

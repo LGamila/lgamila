@@ -1,1 +1,6 @@
-- Fix kick ratelimit
+✔ migrate @lgamila/web to use @lgamila/design-system @done(25-08-03 23:32)
+☐ Fix kick ratelimit
+☐ [good-first-issue] migrate @lgamila/extension to use @lgamila/design-system
+☐ @lgamila/analytics
+☐ @lgamila/observability
+☐ @lgamila/auth

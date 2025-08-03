@@ -1,12 +1,13 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { QueryClientProvider } from '@tanstack/react-query';
-import { useForm } from 'react-hook-form';
-import { BsFire } from 'react-icons/bs';
-import * as z from 'zod';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@lgamila/design-system/components/ui/button';
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from '@lgamila/design-system/components/ui/card';
 import {
   Form,
   FormControl,
@@ -15,8 +16,12 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
+} from '@lgamila/design-system/components/ui/form';
+import { Input } from '@lgamila/design-system/components/ui/input';
+import { QueryClientProvider } from '@tanstack/react-query';
+import { useForm } from 'react-hook-form';
+import { BsFire } from 'react-icons/bs';
+import * as z from 'zod';
 import { queryClient } from '@/store';
 import { useSuggestStreamer } from '@/store/mutations/suggest-streamer';
 
@@ -33,8 +38,10 @@ const formSchema = z
     path: ['twitchUsername'],
   });
 
+type FormValues = z.infer<typeof formSchema>;
+
 export function SuggestStreamerForm() {
-  const form = useForm<z.infer<typeof formSchema>>({
+  const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: '',
@@ -45,7 +52,7 @@ export function SuggestStreamerForm() {
   const { mutate: suggestStreamer, isPending: isLoading } =
     useSuggestStreamer();
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  function onSubmit(values: FormValues) {
     suggestStreamer({
       name: values.name,
       twitchUsername: values.twitchUsername || '',

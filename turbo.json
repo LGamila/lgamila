@@ -10,11 +10,18 @@
     "lint": {
       "dependsOn": ["^lint"]
     },
+    "format": {
+      "dependsOn": ["^format"]
+    },
     "check-types": {
       "dependsOn": ["^check-types"]
     },
     "dev": {
       "env": ["DATABASE_URL"],
+      "cache": false,
+      "persistent": true
+    },
+    "clean": {
       "cache": false,
       "persistent": true
     }
