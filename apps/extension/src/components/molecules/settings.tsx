@@ -41,11 +41,11 @@ export function SettingsDialog() {
     (v) =>
       v === undefined
         ? {
-          autoRedirect: true,
-          notifyWhenStreamerIsLive: true,
-          onlyNotifyWhenFavoriteStreamerIsLive: false,
-          playNotificationSound: true,
-        }
+            autoRedirect: true,
+            notifyWhenStreamerIsLive: true,
+            onlyNotifyWhenFavoriteStreamerIsLive: false,
+            playNotificationSound: true,
+          }
         : v
   );
 

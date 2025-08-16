@@ -2,7 +2,7 @@ export const Footer = () => {
   return (
     <div className="w-full flex flex-col justify-start text-xs text-white/30">
       <p>
-        © <b>2025</b>  LGamila Live, a project by{' '}
+        © <b>2025</b> LGamila Live, a project by{' '}
         <a
           className="text-accent"
           href="https://www.twitch.tv/stormix_dev/"
@@ -10,7 +10,8 @@ export const Footer = () => {
           target="_blank"
         >
           Stormix
-        </a> and{' '}
+        </a>{' '}
+        and{' '}
         <a
           className="text-accent"
           href="https://x.com/ekb9816"
@@ -19,7 +20,8 @@ export const Footer = () => {
         >
           EKB9816
         </a>
-        . </p>
+        .{' '}
+      </p>
 
       <p className="italic">
         Original project by{' '}

@@ -127,7 +127,9 @@ export function StreamerCard({
       <div className={cn('flex flex-row gap-1 items-center px-4 w-fit')}>
         {!streamer.livePlatforms && streamer.livePlatform && (
           <Button
-            icon={streamer.livePlatform === 'twitch' ? <FiTwitch /> : <RiKickLine />}
+            icon={
+              streamer.livePlatform === 'twitch' ? <FiTwitch /> : <RiKickLine />
+            }
             onClick={onClick}
             variant={streamer.isLive ? 'outline' : 'ghost'}
           >
@@ -147,10 +149,7 @@ export function StreamerCard({
           </Button>
         ))}
         {!streamer.isLive && (
-          <Button
-            onClick={onClick}
-            variant="ghost"
-          >
+          <Button onClick={onClick} variant="ghost">
             <span className="text-xs">Offline</span>
           </Button>
         )}
