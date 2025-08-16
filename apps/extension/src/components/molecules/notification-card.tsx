@@ -26,10 +26,10 @@ export function NotificationCard({
         <p className="text-muted-foreground text-xs">LGamila Live</p>
         {onDismiss && (
           <button
-            type="button"
-            onClick={onDismiss}
-            className="ml-auto p-1 rounded-sm opacity-70 hover:opacity-100 focus:opacity-100 transition-opacity"
             aria-label="Dismiss notification"
+            className="ml-auto p-1 rounded-sm opacity-70 hover:opacity-100 focus:opacity-100 transition-opacity"
+            onClick={onDismiss}
+            type="button"
           >
             <FiX className="size-3" />
           </button>

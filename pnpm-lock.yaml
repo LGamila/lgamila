@@ -82,7 +82,7 @@ importers:
         version: 16.5.0
       drizzle-orm:
         specifier: ^0.41.0
-        version: 0.41.0(@opentelemetry/api@1.9.0)(@types/pg@8.11.13)(better-sqlite3@11.10.0)(bun-types@1.2.19(@types/react@19.1.8))(gel@2.0.2)(kysely@0.27.6)(pg@8.14.1)
+        version: 0.41.0(@opentelemetry/api@1.9.0)(@types/pg@8.11.13)(better-sqlite3@11.10.0)(bun-types@1.2.20(@types/react@19.1.8))(gel@2.0.2)(kysely@0.27.6)(pg@8.14.1)
       hono:
         specifier: ^4.7.5
         version: 4.7.7
@@ -128,7 +128,7 @@ importers:
         version: 0.6.1
       '@types/bun':
         specifier: latest
-        version: 1.2.19(@types/react@19.1.8)
+        version: 1.2.20(@types/react@19.1.8)
       '@types/pg':
         specifier: ^8.11.13
         version: 8.11.13
@@ -177,6 +177,9 @@ importers:
       '@radix-ui/react-tooltip':
         specifier: ^1.2.7
         version: 1.2.7(@types/react-dom@18.2.18)(@types/react@18.2.48)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      '@types/firefox-webext-browser':
+        specifier: ^120.0.4
+        version: 120.0.4
       class-variance-authority:
         specifier: ^0.7.1
         version: 0.7.1
@@ -540,7 +543,7 @@ importers:
     devDependencies:
       '@types/bun':
         specifier: latest
-        version: 1.2.19(@types/react@19.1.8)
+        version: 1.2.20(@types/react@19.1.8)
 
   packages/typescript-config: {}
 
@@ -4190,8 +4193,8 @@ packages:
   '@types/babel__traverse@7.20.7':
     resolution: {integrity: sha512-dkO5fhS7+/oos4ciWxyEyjWe48zmG6wbCheo/G2ZnHx4fs3EU6YC6UM8rk56gAjNJ9P3MTH2jo5jb92/K6wbng==}
 
-  '@types/bun@1.2.19':
-    resolution: {integrity: sha512-d9ZCmrH3CJ2uYKXQIUuZ/pUnTqIvLDS0SK7pFmbx8ma+ziH/FRMoAq5bYpRG7y+w1gl+HgyNZbtqgMq4W4e2Lg==}
+  '@types/bun@1.2.20':
+    resolution: {integrity: sha512-dX3RGzQ8+KgmMw7CsW4xT5ITBSCrSbfHc36SNT31EOUg/LA9JWq0VDdEXDRSe1InVWpd2yLUM1FUF/kEOyTzYA==}
 
   '@types/chai@5.2.2':
     resolution: {integrity: sha512-8kB30R7Hwqf40JPiKhVzodJs2Qc1ZJ5zuT3uzw5Hq/dhNCl3G3l83jfpdI1e20BP348+fV7VIL/+FxaXkqBmWg==}
@@ -4243,6 +4246,9 @@ packages:
 
   '@types/filewriter@0.0.33':
     resolution: {integrity: sha512-xFU8ZXTw4gd358lb2jw25nxY9QAgqn2+bKKjKOYfNCzN4DKCFetK7sPtrlpg66Ywe3vWY9FNxprZawAh9wfJ3g==}
+
+  '@types/firefox-webext-browser@120.0.4':
+    resolution: {integrity: sha512-lBrpf08xhiZBigrtdQfUaqX1UauwZ+skbFiL8u2Tdra/rklkKadYmIzTwkNZSWtuZ7OKpFqbE2HHfDoFqvZf6w==}
 
   '@types/fontkit@2.0.8':
     resolution: {integrity: sha512-wN+8bYxIpJf+5oZdrdtaX04qUuWHcKxcDEgRS9Qm9ZClSHjzEn13SxUC+5eRM+4yXIeTYk8mTzLAWGF64847ew==}
@@ -4748,8 +4754,8 @@ packages:
   bullmq@5.56.4:
     resolution: {integrity: sha512-5wSHd0oXs2jS6P+6tay/01Iz0cWRK8iYcscKtpS/GewEq0bJZwbkMZc77GJVOT9SP+UQuXA2y+pQTdCQJel7kQ==}
 
-  bun-types@1.2.19:
-    resolution: {integrity: sha512-uAOTaZSPuYsWIXRpj7o56Let0g/wjihKCkeRqUBhlLVM/Bt+Fj9xTo+LhC1OV1XDaGkz4hNC80et5xgy+9KTHQ==}
+  bun-types@1.2.20:
+    resolution: {integrity: sha512-pxTnQYOrKvdOwyiyd/7sMt9yFOenN004Y6O4lCcCUoKVej48FS5cvTw9geRaEcB9TsDZaJKAxPTVvi8tFsVuXA==}
     peerDependencies:
       '@types/react': ^19
 
@@ -13565,9 +13571,9 @@ snapshots:
     dependencies:
       '@babel/types': 7.28.0
 
-  '@types/bun@1.2.19(@types/react@19.1.8)':
+  '@types/bun@1.2.20(@types/react@19.1.8)':
     dependencies:
-      bun-types: 1.2.19(@types/react@19.1.8)
+      bun-types: 1.2.20(@types/react@19.1.8)
     transitivePeerDependencies:
       - '@types/react'
 
@@ -13621,6 +13627,8 @@ snapshots:
       '@types/filewriter': 0.0.33
 
   '@types/filewriter@0.0.33': {}
+
+  '@types/firefox-webext-browser@120.0.4': {}
 
   '@types/fontkit@2.0.8':
     dependencies:
@@ -14366,7 +14374,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  bun-types@1.2.19(@types/react@19.1.8):
+  bun-types@1.2.20(@types/react@19.1.8):
     dependencies:
       '@types/node': 22.17.0
       '@types/react': 19.1.8
@@ -14984,12 +14992,12 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  drizzle-orm@0.41.0(@opentelemetry/api@1.9.0)(@types/pg@8.11.13)(better-sqlite3@11.10.0)(bun-types@1.2.19(@types/react@19.1.8))(gel@2.0.2)(kysely@0.27.6)(pg@8.14.1):
+  drizzle-orm@0.41.0(@opentelemetry/api@1.9.0)(@types/pg@8.11.13)(better-sqlite3@11.10.0)(bun-types@1.2.20(@types/react@19.1.8))(gel@2.0.2)(kysely@0.27.6)(pg@8.14.1):
     optionalDependencies:
       '@opentelemetry/api': 1.9.0
       '@types/pg': 8.11.13
       better-sqlite3: 11.10.0
-      bun-types: 1.2.19(@types/react@19.1.8)
+      bun-types: 1.2.20(@types/react@19.1.8)
       gel: 2.0.2
       kysely: 0.27.6
       pg: 8.14.1

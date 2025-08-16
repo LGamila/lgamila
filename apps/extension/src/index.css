@@ -88,8 +88,15 @@
   }
 }
 
-#plasmo-shadow-container {
+/*#plasmo-shadow-container {
   position: absolute;
   top: 25px;
   left: calc(100% - 275px);
+}*/
+
+#plasmo-shadow-container {
+  position: absolute;
+  top: 25px;
+  right: 25px;
+  left: auto;
 }
