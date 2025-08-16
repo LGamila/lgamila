@@ -21,9 +21,16 @@ export const useStreamers = () => {
       const streamers = data.streamers;
       const liveStreamers = streamers.filter((streamer) => streamer.isLive);
       const badgeCount = liveStreamers.length;
-      if (chrome) {
+      /*if (chrome) {
         chrome.action.setBadgeText({ text: badgeCount.toString() });
         chrome.action.setBadgeBackgroundColor({ color: '#C11919' });
+      }*/
+      if (typeof chrome !== 'undefined' && chrome.action) {
+        chrome.action.setBadgeText({ text: badgeCount.toString() });
+        chrome.action.setBadgeBackgroundColor({ color: '#C11919' });
+      } else if (typeof browser !== 'undefined' && browser.browserAction) {
+        browser.browserAction.setBadgeText({ text: badgeCount.toString() });
+        browser.browserAction.setBadgeBackgroundColor({ color: '#C11919' });
       }
     },
   });

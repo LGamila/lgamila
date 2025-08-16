@@ -510,10 +510,19 @@ body {
 }
 
 @keyframes float-16 {
-  0%, 100% { transform: translateY(0px) translateX(0px) rotate(0deg); }
-  25% { transform: translateY(-30px) translateX(-10px) rotate(3deg); }
-  50% { transform: translateY(-45px) translateX(15px) rotate(-5deg); }
-  75% { transform: translateY(-25px) translateX(-5px) rotate(4deg); }
+  0%,
+  100% {
+    transform: translateY(0px) translateX(0px) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-30px) translateX(-10px) rotate(3deg);
+  }
+  50% {
+    transform: translateY(-45px) translateX(15px) rotate(-5deg);
+  }
+  75% {
+    transform: translateY(-25px) translateX(-5px) rotate(4deg);
+  }
 }
 
 .animate-float-16 {
