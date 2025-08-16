@@ -1,5 +1,5 @@
 {
-  // "extends": "@lgamila/typescript-config/bun.json",
+  "extends": "@lgamila/typescript-config/bun.json",
   "compilerOptions": {
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
