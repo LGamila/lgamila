@@ -1,33 +1,33 @@
-import './index.css';
-import logo from 'data-base64:~assets/logo.svg';
-import { ArrowUpDown, Loader2, Search, X } from 'lucide-react';
-import { useRef, useState } from 'react';
-import { QueryClient, QueryClientProvider } from 'react-query';
-import { Toaster } from '@/components/ui/sonner';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Footer } from './components/molecules/footer';
-import { SettingsDialog } from './components/molecules/settings';
-import { SortDropdown } from './components/molecules/sort-dropdown';
-import type { SortOption } from './components/molecules/streamer-list';
-import { StreamerList } from './components/molecules/streamer-list';
-import { Button } from './components/ui/button';
-import { Card, CardContent } from './components/ui/card';
-import { Input } from './components/ui/input';
-import { useSearch } from './hooks/use-search';
-import { useStreamers } from './hooks/use-streamers';
-import { APP_NAME } from './lib/constants';
-import { cn } from './lib/utils';
+import "./index.css";
+import logo from "data-base64:~assets/logo.svg";
+import { ArrowUpDown, Loader2, Search, X } from "lucide-react";
+import { useRef, useState } from "react";
+import { QueryClient, QueryClientProvider } from "react-query";
+import { Toaster } from "@/components/ui/sonner";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Footer } from "./components/molecules/footer";
+import { SettingsDialog } from "./components/molecules/settings";
+import { SortDropdown } from "./components/molecules/sort-dropdown";
+import type { SortOption } from "./components/molecules/streamer-list";
+import { StreamerList } from "./components/molecules/streamer-list";
+import { Button } from "./components/ui/button";
+import { Card, CardContent } from "./components/ui/card";
+import { Input } from "./components/ui/input";
+import { useSearch } from "./hooks/use-search";
+import { useStreamers } from "./hooks/use-streamers";
+import { APP_NAME } from "./lib/constants";
+import { cn } from "./lib/utils";
 
 function StreamersPopup() {
   const [toggleSearch, setToggleSearch] = useState(false);
   const [showSort, setShowSort] = useState(false);
-  const [sortBy, setSortBy] = useState<SortOption>('default');
+  const [sortBy, setSortBy] = useState<SortOption>("default");
   const inputRef = useRef<HTMLInputElement>(null);
 
   const { data: streamersData, isLoading } = useStreamers();
   const streamers = streamersData?.streamers || [];
   const { search, results } = useSearch(streamers, {
-    keys: ['name', 'twitchUsername', 'kickUsername', 'category', 'title'],
+    keys: ["name", "twitchUsername", "kickUsername", "category", "title"],
     threshold: 0.3,
   });
 
@@ -44,7 +44,7 @@ function StreamersPopup() {
         <Tabs className="w-full" defaultValue="live">
           <div className="flex flex-row justify-between items-start">
             <div
-              className={cn('flex flex-row justify-start', {
+              className={cn("flex flex-row justify-start", {
                 hidden: toggleSearch || showSort,
               })}
             >
@@ -56,8 +56,8 @@ function StreamersPopup() {
             </div>
             <div
               className={cn(
-                'flex flex-row justify-center gap-2',
-                (toggleSearch || showSort) && 'w-full'
+                "flex flex-row justify-center gap-2",
+                (toggleSearch || showSort) && "w-full"
               )}
             >
               <Button

@@ -12,7 +12,9 @@ function Input({
 }) {
   return (
     <div className="relative">
-      {icon && <div className="absolute left-3 top-1/2 -translate-y-1/2">{icon}</div>}
+      {icon && (
+        <div className="absolute left-3 top-1/2 -translate-y-1/2">{icon}</div>
+      )}
 
       <input
         className={cn(
