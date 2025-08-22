@@ -1,14 +1,14 @@
 /** biome-ignore-all lint/complexity/noExcessiveCognitiveComplexity: allow it */
-import styleText from 'data-text:./index.css';
-import { serverToClient } from '@lgamila/shared';
-import { Storage } from '@plasmohq/storage';
-import type { PlasmoCSConfig, PlasmoGetStyle } from 'plasmo';
-import { useCallback, useEffect, useState } from 'react';
-import { NotificationCard } from './components/molecules/notification-card';
-import { playNotificationSound } from './lib/audio';
-import { API_URL, NOTIFICATION_DURATION } from './lib/constants';
-import { logger } from './lib/logger';
-import type { Settings, Streamer } from './lib/types';
+import styleText from "data-text:./index.css";
+import { serverToClient } from "@lgamila/shared";
+import { Storage } from "@plasmohq/storage";
+import type { PlasmoCSConfig, PlasmoGetStyle } from "plasmo";
+import { useCallback, useEffect, useState } from "react";
+import { NotificationCard } from "./components/molecules/notification-card";
+import { playNotificationSound } from "./lib/audio";
+import { API_URL, NOTIFICATION_DURATION } from "./lib/constants";
+import { logger } from "./lib/logger";
+import type { Settings, Streamer } from "./lib/types";
 
 interface StreamerData {
   name: string;
@@ -18,7 +18,7 @@ interface StreamerData {
 }
 
 export const config: PlasmoCSConfig = {
-  matches: ['https://*.twitch.tv/*', 'https://*.kick.com/*'],
+  matches: ["https://*.twitch.tv/*", "https://*.kick.com/*"],
   all_frames: true,
 };
 
@@ -27,7 +27,7 @@ const CHECK_INTERVAL = 10_000;
 
 const getStreamer = async (
   name: string,
-  platform: 'twitch' | 'kick'
+  platform: "twitch" | "kick"
 ): Promise<Streamer[]> => {
   const response = await fetch(
     `${API_URL}/api/streamers?search=${name}&platform=${platform}`
@@ -40,10 +40,10 @@ const getStreamer = async (
 };
 
 const determinePlatform = (url: string) => {
-  if (url.includes('twitch.tv')) {
-    return 'twitch' as const;
+  if (url.includes("twitch.tv")) {
+    return "twitch" as const;
   }
-  return 'kick' as const;
+  return "kick" as const;
 };
 
 const TWITCH_URL_REGEX =
@@ -110,7 +110,7 @@ const checkAndRedirect = async () => {
       currentStreamerData.livePlatforms?.[0] ??
       currentStreamerData.livePlatform;
     const username =
-      platform === 'twitch'
+      platform === "twitch"
         ? currentStreamerData.twitchUsername
         : currentStreamerData.kickUsername;
     window.location.href = `https://www.${platform}.com/${username}`;
@@ -122,7 +122,7 @@ let checkInterval: number | null = null;
 
 const startChecking = () => {
   if (checkInterval) return;
-  logger.info('Starting auto-redirect checks');
+  logger.info("Starting auto-redirect checks");
   checkAndRedirect(); // Initial check
   checkInterval = setInterval(
     checkAndRedirect,
@@ -132,7 +132,7 @@ const startChecking = () => {
 
 const stopChecking = () => {
   if (!checkInterval) return;
-  logger.info('Stopping auto-redirect checks');
+  logger.info("Stopping auto-redirect checks");
   clearInterval(checkInterval);
   checkInterval = null;
 };
@@ -152,7 +152,7 @@ storage.watch({
 });
 
 // Initial setup based on current settings
-storage.get<Settings>('settings').then((settings) => {
+storage.get<Settings>("settings").then((settings) => {
   if (settings?.autoRedirect) {
     startChecking();
   }
@@ -160,13 +160,13 @@ storage.get<Settings>('settings').then((settings) => {
 
 // Notification Card
 export const getStyle: PlasmoGetStyle = () => {
-  const style = document.createElement('style');
-  style.textContent = styleText.replaceAll(':root', ':host(plasmo-csui)');
+  const style = document.createElement("style");
+  style.textContent = styleText.replaceAll(":root", ":host(plasmo-csui)");
   return style;
 };
 
 export default function Root() {
-  const [streamers, setStreamers] = useState<StreamerData[]>([]);
+  /*const [streamers, setStreamers] = useState<StreamerData[]>([]);
 
   const dismissNotification = useCallback((streamerName: string) => {
     setStreamers((prev) => prev.filter((s) => s.name !== streamerName));
@@ -186,21 +186,21 @@ export default function Root() {
     chrome.runtime.onMessage.addListener(async (message) => {
       const parsed = serverToClient.safeParse(message);
       if (!parsed.success) {
-        logger.warn('Invalid message', parsed.error);
+        logger.warn("Invalid message", parsed.error);
         return;
       }
-      if (parsed.data.type === 'streamer-live') {
+      if (parsed.data.type === "streamer-live") {
         // Check settings before showing notification
-        const settings = await storage.get<Settings>('settings');
+        const settings = await storage.get<Settings>("settings");
         const favorites =
-          (await storage.get<Streamer['id'][]>('favorites')) || [];
+          (await storage.get<Streamer["id"][]>("favorites")) || [];
         const blockedStreamers =
-          (await storage.get<Streamer['id'][]>('blocked')) || [];
+          (await storage.get<Streamer["id"][]>("blocked")) || [];
 
         // Skip if notifications are disabled
         if (settings?.notifyWhenStreamerIsLive === false) {
           logger.info(
-            'Notifications disabled, skipping content script notification'
+            "Notifications disabled, skipping content script notification"
           );
           return;
         }
@@ -208,7 +208,7 @@ export default function Root() {
         // Skip if streamer is blocked
         if (blockedStreamers.includes(parsed.data.data.id)) {
           logger.info(
-            'Streamer is blocked, skipping content script notification'
+            "Streamer is blocked, skipping content script notification"
           );
           return;
         }
@@ -219,7 +219,7 @@ export default function Root() {
           !favorites.includes(parsed.data.data.id)
         ) {
           logger.info(
-            'Only favorite notifications enabled and streamer is not a favorite, skipping content script notification'
+            "Only favorite notifications enabled and streamer is not a favorite, skipping content script notification"
           );
           return;
         }
@@ -251,6 +251,29 @@ export default function Root() {
           platform={streamer.platform}
         />
       ))}
+    </div>
+  );*/
+
+  const [show, setShow] = useState(false);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setShow(true);
+      setTimeout(() => setShow(false), 500000); // Hide after 4s
+    }, 5000); // Show every 10s
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <div className="top-0 right-0 flex flex-col gap-2">
+      {show && (
+        <NotificationCard
+          avatar="https://static-cdn.jtvnw.net/jtv_user_pictures/01b6403b-93c0-49a1-8903-87c7d4bd181e-profile_image-300x300.png"
+          name="b0usif"
+          platform="twitch"
+          link="https://www.twitch.tv/b0usif"
+        />
+      )}
     </div>
   );
 }

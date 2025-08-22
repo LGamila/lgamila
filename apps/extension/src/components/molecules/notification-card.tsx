@@ -1,8 +1,8 @@
-import logo from 'data-base64:~assets/logo.svg';
-import { FiTwitch, FiX } from 'react-icons/fi';
-import { RiKickLine } from 'react-icons/ri';
-import { Avatar, AvatarImage } from '../ui/avatar';
-import { Button } from '../ui/button';
+import logo from "data-base64:~assets/logo.svg";
+import { FiTwitch, FiX } from "react-icons/fi";
+import { RiKickLine } from "react-icons/ri";
+import { Avatar, AvatarImage } from "../ui/avatar";
+import { Button } from "../ui/button";
 
 interface NotificationCardProps {
   name: string;
@@ -20,7 +20,7 @@ export function NotificationCard({
   onDismiss,
 }: NotificationCardProps) {
   return (
-    <div className="bg-background py-2 px-4 rounded-lg items-center justify-center shadow-lg w-[250px] gap-2 mx-auto flex flex-col text-foreground animate-in slide-in-from-right-full fade-in duration-500 ease-out relative">
+    <div className="bg-background py-2 px-4 rounded-lg items-center justify-center shadow-lg gap-2 mx-auto flex flex-col text-foreground animate-in slide-in-from-right-full fade-in duration-500 ease-out relative w-md min-w-md">
       <div className="flex flex-row gap-2 justify-start items-start w-full py-1">
         <img alt="logo" className="size-4" src={logo} />
         <p className="text-muted-foreground text-xs">LGamila Live</p>
@@ -35,19 +35,21 @@ export function NotificationCard({
           </button>
         )}
       </div>
-      <div className="flex flex-row gap-4 items-center">
-        <Avatar className="size-16">
-          <AvatarImage src={avatar} />
-        </Avatar>
-        <div className="flex flex-col gap-0 flex-grow">
-          <h3 className="font-medium">{name}</h3>
-          <p className="text-muted-foreground">
-            {name} is live on {platform}
-          </p>
+      <div className="flex flex-row gap-4 items-center justify-between w-full">
+        <div className="flex flex-row gap-1 items-center justify-start">
+          <Avatar className="size-16">
+            <AvatarImage src={avatar} />
+          </Avatar>
+          <div className="flex flex-col gap-0 flex-grow">
+            <h3 className="font-medium">{name}</h3>
+            <p className="text-muted-foreground">
+              {name} is live on {platform}
+            </p>
+          </div>
         </div>
         <Button
-          icon={platform === 'twitch' ? <FiTwitch /> : <RiKickLine />}
-          onClick={() => window.open(link, '_blank')}
+          icon={platform === "twitch" ? <FiTwitch /> : <RiKickLine />}
+          onClick={() => window.open(link, "_blank")}
           size="sm"
         >
           Watch Now
