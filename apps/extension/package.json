@@ -1,7 +1,7 @@
 {
   "name": "@lgamila/extension",
   "displayName": "LGamila Live",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "This extension shows you a real-time list of all Moroccan Twitch and Kick streamers who are currently live.",
   "author": "Stormix <hello@stormix.dev>",
   "scripts": {
