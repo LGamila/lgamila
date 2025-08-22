@@ -166,7 +166,7 @@ export const getStyle: PlasmoGetStyle = () => {
 };
 
 export default function Root() {
-  /*const [streamers, setStreamers] = useState<StreamerData[]>([]);
+  const [streamers, setStreamers] = useState<StreamerData[]>([]);
 
   const dismissNotification = useCallback((streamerName: string) => {
     setStreamers((prev) => prev.filter((s) => s.name !== streamerName));
@@ -251,29 +251,6 @@ export default function Root() {
           platform={streamer.platform}
         />
       ))}
-    </div>
-  );*/
-
-  const [show, setShow] = useState(false);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setShow(true);
-      setTimeout(() => setShow(false), 500000); // Hide after 4s
-    }, 5000); // Show every 10s
-    return () => clearInterval(interval);
-  }, []);
-
-  return (
-    <div className="top-0 right-0 flex flex-col gap-2">
-      {show && (
-        <NotificationCard
-          avatar="https://static-cdn.jtvnw.net/jtv_user_pictures/01b6403b-93c0-49a1-8903-87c7d4bd181e-profile_image-300x300.png"
-          name="b0usif"
-          platform="twitch"
-          link="https://www.twitch.tv/b0usif"
-        />
-      )}
     </div>
   );
 }
