@@ -1,13 +1,14 @@
-import { Eye, EyeOff } from 'lucide-react';
-import { FaRegStar, FaStar } from 'react-icons/fa6';
-import { FiTwitch } from 'react-icons/fi';
-import { GoDotFill } from 'react-icons/go';
-import { RiKickLine } from 'react-icons/ri';
-import type { Streamer } from '@/lib/types';
-import { cn } from '@/lib/utils';
-import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
-import { Button } from '../ui/button';
-import { Tooltip, TooltipContent, TooltipTrigger } from '../ui/tooltip';
+import { Eye, EyeOff } from "lucide-react";
+import { FaRegStar, FaStar } from "react-icons/fa6";
+import { FiTwitch } from "react-icons/fi";
+import { GoDotFill } from "react-icons/go";
+import { RiKickLine } from "react-icons/ri";
+import type { Streamer } from "@/lib/types";
+import { cn } from "@/lib/utils";
+import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
+import { Button } from "../ui/button";
+import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
+import { platform } from "os";
 
 const streamerDescription = (streamer: Streamer) => {
   if (streamer.category) {
@@ -17,7 +18,7 @@ const streamerDescription = (streamer: Streamer) => {
     return `${streamer.viewerCount} viewers`;
   }
 
-  return '';
+  return "";
 };
 
 export function StreamerCard({
@@ -36,7 +37,7 @@ export function StreamerCard({
   const StarIcon = isFavorite ? FaStar : FaRegStar;
   const BlockIcon = isBlocked ? EyeOff : Eye;
 
-  const onClick = () => {
+  const onClick = (platform: string | null = null) => {
     const twitchUrl = streamer.twitchUsername
       ? `https://www.twitch.tv/${streamer.twitchUsername}`
       : null;
@@ -49,20 +50,28 @@ export function StreamerCard({
     }
 
     if (streamer.isLive) {
-      window.open(
-        streamer.livePlatform === 'twitch' ? twitchUrl : kickUrl,
-        '_blank'
-      );
+      if (streamer.livePlatforms && streamer.livePlatforms.length > 1) {
+        if (platform === "twitch" && twitchUrl) {
+          window.open(twitchUrl, "_blank");
+        } else {
+          window.open(kickUrl, "_blank");
+        }
+      } else {
+        window.open(
+          streamer.livePlatform === "twitch" ? twitchUrl : kickUrl,
+          "_blank"
+        );
+      }
     } else {
-      window.open(twitchUrl || kickUrl, '_blank');
+      window.open(twitchUrl || kickUrl, "_blank");
     }
   };
   return (
     <div
       className={cn(
-        'flex flex-row gap-2 items-center transition-opacity duration-300',
+        "flex flex-row gap-2 items-center transition-opacity duration-300",
         {
-          'opacity-30': !streamer.isLive,
+          "opacity-30": !streamer.isLive,
         }
       )}
     >
@@ -77,7 +86,7 @@ export function StreamerCard({
             </div>
           </TooltipTrigger>
           <TooltipContent>
-            {isFavorite ? 'Remove from favorites' : 'Add to favorites'}
+            {isFavorite ? "Remove from favorites" : "Add to favorites"}
           </TooltipContent>
         </Tooltip>
         <Tooltip>
@@ -90,7 +99,7 @@ export function StreamerCard({
             </div>
           </TooltipTrigger>
           <TooltipContent>
-            {isBlocked ? 'Show streamer' : 'Hide streamer'}
+            {isBlocked ? "Show streamer" : "Hide streamer"}
           </TooltipContent>
         </Tooltip>
       </div>
@@ -100,7 +109,7 @@ export function StreamerCard({
           <TooltipTrigger>
             <div
               className="flex flex-row gap-2 justify-start items-center"
-              onClick={onClick}
+              onClick={() => onClick()}
             >
               <Avatar>
                 <AvatarImage src={streamer.avatarUrl} />
@@ -124,24 +133,24 @@ export function StreamerCard({
           <TooltipContent>{streamer.title ?? streamer.name}</TooltipContent>
         </Tooltip>
       </div>
-      <div className={cn('flex flex-row gap-1 items-center px-4 w-fit')}>
+      <div className={cn("flex flex-row gap-1 items-center px-4 w-fit")}>
         {!streamer.livePlatforms && streamer.livePlatform && (
           <Button
             icon={
-              streamer.livePlatform === 'twitch' ? <FiTwitch /> : <RiKickLine />
+              streamer.livePlatform === "twitch" ? <FiTwitch /> : <RiKickLine />
             }
-            onClick={onClick}
-            variant={streamer.isLive ? 'outline' : 'ghost'}
+            onClick={() => onClick()}
+            variant={streamer.isLive ? "outline" : "ghost"}
           >
             <span className="text-xs">{streamer.livePlatform}</span>
           </Button>
         )}
         {streamer.livePlatforms?.map((platform) => (
           <Button
-            icon={platform === 'twitch' ? <FiTwitch /> : <RiKickLine />}
+            icon={platform === "twitch" ? <FiTwitch /> : <RiKickLine />}
             key={platform}
-            onClick={onClick}
-            variant={streamer.isLive ? 'outline' : 'ghost'}
+            onClick={() => onClick(platform)}
+            variant={streamer.isLive ? "outline" : "ghost"}
           >
             {streamer.livePlatforms.length === 1 && (
               <span className="text-xs">{platform}</span>
@@ -149,7 +158,7 @@ export function StreamerCard({
           </Button>
         ))}
         {!streamer.isLive && (
-          <Button onClick={onClick} variant="ghost">
+          <Button onClick={() => onClick()} variant="ghost">
             <span className="text-xs">Offline</span>
           </Button>
         )}
