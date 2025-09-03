@@ -48,8 +48,10 @@ export interface Settings {
 }
 
 export type SortOption =
-  | 'default'
-  | 'viewers-desc'
-  | 'viewers-asc'
-  | 'name-asc'
-  | 'name-desc';
+  | "default"
+  | "viewers-desc"
+  | "viewers-asc"
+  | "name-asc"
+  | "name-desc";
+
+export type Platform = "twitch" | "kick";
