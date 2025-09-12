@@ -8,7 +8,6 @@ import { cn } from "@/lib/utils";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { Button } from "../ui/button";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
-import { platform } from "os";
 
 const streamerDescription = (streamer: Streamer) => {
   if (streamer.category) {
