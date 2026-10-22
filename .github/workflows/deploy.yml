@@ -5,6 +5,12 @@ on:
     branches:
       - main
     paths:
+      - "Dockerfile"
+      - ".dockerignore"
+      - "package.json"
+      - "pnpm-lock.yaml"
+      - "pnpm-workspace.yaml"
+      - ".npmrc"
       - "apps/**"
       - "packages/**"
       - ".github/workflows/**"
@@ -49,5 +55,6 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
           tags: |
+            ${{ secrets.DOCKER_USERNAME }}/moroccan-stream:sha-${{ github.sha }}
             ${{ secrets.DOCKER_USERNAME }}/moroccan-stream:${{ env.version }}
             ${{ secrets.DOCKER_USERNAME }}/moroccan-stream:latest
